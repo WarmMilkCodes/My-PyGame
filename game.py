@@ -1,4 +1,6 @@
+from email.mime import image
 import pygame
+from gameObject import GameObject
 
 class Game:
     def __init__(self):
@@ -10,21 +12,18 @@ class Game:
         self.game_window = pygame.display.set_mode((self.width, self.height))
 
         # Background
-        self.background_image = pygame.image.load('assets/background.png')
-        self.background_image_scaled = pygame.transform.scale(self.background_image, (self.width, self.height))
-
+        self.background = GameObject(0,0, self.width, self.height, 'assets/background.png')
 
         # Treasure
-        self.treasure_image = pygame.image.load('assets/treasure.png')
-        self.treasure_image_scaled = pygame.transform.scale(self.treasure_image, (50, 50))
+        self.treasure = GameObject(375,50, 50, 50, 'assets/treasure.png')
 
         self.clock = pygame.time.Clock()
     
 
     def draw_objects(self):
         self.game_window.fill(self.white_color)        
-        self.game_window.blit(self.background_image_scaled, (0,0))
-        self.game_window.blit(self.treasure_image_scaled, (375,50))
+        self.game_window.blit(self.background.image, (self.background.x, self.background.y))
+        self.game_window.blit(self.treasure.image, (self.treasure.x, self.treasure.y))
         pygame.display.update()
 
     def run_game_loop(self):
