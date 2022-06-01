@@ -1,4 +1,3 @@
-from telnetlib import GA
 import pygame
 from game import Game
 
