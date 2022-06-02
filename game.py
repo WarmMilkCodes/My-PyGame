@@ -2,6 +2,7 @@ from email.mime import image
 import pygame
 from gameObject import GameObject
 from player import Player
+from enemy import Enemy
 
 class Game:
     def __init__(self):
@@ -24,6 +25,9 @@ class Game:
     
         # Player
         self.player = Player(375, 700, 50, 50, 'assets/player.png', 5)
+        
+        # Enemy
+        self.enemy = Enemy(50, 600, 50, 50, 'assets/enemy.png', 5)
 
 
     def draw_objects(self):
@@ -32,6 +36,7 @@ class Game:
         self.game_window.blit(self.background.image, (self.background.x, self.background.y)) # Draw background
         self.game_window.blit(self.treasure.image, (self.treasure.x, self.treasure.y)) # Draw treasure chest
         self.game_window.blit(self.player.image, (self.player.x, self.player.y)) # Draw player character
+        self.game_window.blit(self.enemy.image, (self.enemy.x, self.enemy.y)) # Draw enemy character
         
         
         pygame.display.update()
@@ -56,7 +61,8 @@ class Game:
                         player_direction = 0
             
             # Execute Logic
-            self.player.move(player_direction)
+            self.player.move(player_direction, self.height)
+            self.enemy.move(self.width)
             
             # Update Display
             self.draw_objects()
