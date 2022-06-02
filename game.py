@@ -23,27 +23,41 @@ class Game:
         self.clock = pygame.time.Clock()
     
         # Player
-        self.player = Player(375, 700, 50, 50, 'assets/player.png', 10)
+        self.player = Player(375, 700, 50, 50, 'assets/player.png', 5)
 
 
     def draw_objects(self):
         self.game_window.fill(self.black_color)        
         
-        self.game_window.blit(self.background.image, (self.background.x, self.background.y))
-        self.game_window.blit(self.treasure.image, (self.treasure.x, self.treasure.y))
-        self.game_window.blit(self.player.image, (self.player.x, self.player.y))
+        self.game_window.blit(self.background.image, (self.background.x, self.background.y)) # Draw background
+        self.game_window.blit(self.treasure.image, (self.treasure.x, self.treasure.y)) # Draw treasure chest
+        self.game_window.blit(self.player.image, (self.player.x, self.player.y)) # Draw player character
         
         
         pygame.display.update()
 
     def run_game_loop(self):
+        
+        player_direction = 0
+        
         while True:
-            # Handle Events
+            # Events Handler
             events = pygame.event.get()
             for event in events:
                 if event.type == pygame.QUIT:
                     return
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        player_direction = -1
+                    elif event.key == pygame.K_DOWN:
+                        player_direction = 1
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                        player_direction = 0
+            
             # Execute Logic
+            self.player.move(player_direction)
+            
             # Update Display
             self.draw_objects()
 
