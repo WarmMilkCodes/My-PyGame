@@ -35,20 +35,18 @@ class Game:
         ]
         
         
+   
         
-        
-
-
     def draw_objects(self):
         self.game_window.fill(self.black_color)        
         
         self.game_window.blit(self.background.image, (self.background.x, self.background.y)) # Draw background
         self.game_window.blit(self.treasure.image, (self.treasure.x, self.treasure.y)) # Draw treasure chest
         self.game_window.blit(self.player.image, (self.player.x, self.player.y)) # Draw player character
-        #self.game_window.blit(self.enemy.image, (self.enemy.x, self.enemy.y)) # Draw enemy character
+        #self.game_window.blit(self.enemy.image, (self.enemy.x, self.enemy.y)) # Draw one enemy character
         
         for enemy in self.enemies:
-            self.game_window.blit(enemy.image, (enemy.x, enemy.y)) # Draw each enemy in list
+            self.game_window.blit(enemy.image, (enemy.x, enemy.y)) # Draw each enemy from enemies list line 31
         
         
         pygame.display.update()
